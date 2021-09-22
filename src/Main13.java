@@ -1,13 +1,29 @@
-import java.util.Arrays;
+import java.util.regex.Matcher;
+
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Main13 {
     public static void main(String[] args) {
         System.out.println("Введите любое предложение. Например: “I love java 8 Я люблю java 14 core1”");
+
         Scanner s = new Scanner(System.in);
-        String str = s.nextLine().replaceAll("(\\w*[0-9]\\s*)|([а-яА-Я]\\s*)|(\\w*[а-яА-Я]\\w*)", "");
-        System.out.println(str);
-        String[] arr = (str.split(" "));
+        Pattern p = Pattern.compile("[^a-zA-Z]+");
+
+        String[] s1 = s.nextLine().split(" ");
+        String result = "";
+
+        for (String word :
+                s1) {
+            Matcher m = p.matcher(word);
+            if (!m.find())
+                result += word + " ";
+        }
+
+        result = result.trim();
+        System.out.println(result);
+
+        String[] arr = (result.split(" "));
         System.out.println(arr.length);
     }
 
